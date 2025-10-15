@@ -7,6 +7,8 @@ import {
   Patch,
   UseGuards,
   Req,
+  Delete,
+  Get,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthService } from './auth.service';
@@ -30,14 +32,35 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  // GET PROFILE
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Req() req) {
+    return this.authService.getProfile(req.user._id);
+  }
+
+  // UPDATE PROFILE
   @UseGuards(JwtAuthGuard)
   @Patch('update')
-  @UseInterceptors(FileInterceptor('avatar')) // 👈 also use 'avatar' here
+  @UseInterceptors(FileInterceptor('avatar'))
   updateProfile(
     @Req() req,
     @UploadedFile() file: Express.Multer.File,
     @Body() updateDto: UpdateAuthDto,
   ) {
     return this.authService.updateProfile(req.user._id, updateDto, file);
+  }
+
+  // DELETE PROFILE
+  @UseGuards(JwtAuthGuard)
+  @Delete('delete')
+  deleteProfile(@Req() req) {
+    return this.authService.deleteProfile(req.user._id);
+  }
+
+  // GET ALL USERS
+  @Get('all')
+  getAllUsers() {
+    return this.authService.getAllUsers();
   }
 }

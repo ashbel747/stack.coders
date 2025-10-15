@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
 }
 
+@layer components {
+  .input {
+    @apply w-full border border-blue-200 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
