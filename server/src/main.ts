@@ -3,14 +3,24 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { getConnectionToken } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable validation globally
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // strips unknown fields
+      forbidNonWhitelisted: true, // throws error for unexpected fields
+      transform: true, // automatically transforms types to DTO types
+    }),
+  );
+
   // Enable CORS for frontend
   app.enableCors({
     origin: [
-      'http://localhost:3001',                   // for local development
+      'http://localhost:3000',        // for local development
     ],
   });
 
