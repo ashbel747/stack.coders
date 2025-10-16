@@ -19,12 +19,6 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
-/* Auth convenience (if needed) */
-export const login = async (email: string, password: string): Promise<AuthResponse> => {
-  const res = await api.post<AuthResponse>('/auth/login', { email, password });
-  return res.data;
-};
-
 /* Projects */
 export const getAllProjects = async (): Promise<Project[]> => {
   const res = await api.get<Project[]>('/projects');
