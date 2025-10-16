@@ -46,6 +46,28 @@ export class ProjectService {
     return project;
   }
 
+  // GET USER'S PERSONAL PROJECTS
+  async getMyProjects(userId: string) {
+    const ownerObjectId = new Types.ObjectId(userId);
+
+    const projects = await this.projectModel
+      .find({ owner: ownerObjectId })
+      .populate('teamMembers', 'name email')
+      .populate('owner', 'name email')
+      .sort({ createdAt: -1 });
+
+    if (!projects || projects.length === 0) {
+      return { message: 'You have no projects yet', projects: [] };
+    }
+
+    return {
+      message: 'Your projects fetched successfully',
+      total: projects.length,
+      projects,
+    };
+  }
+
+
   // UPDATE PROJECT (only owner)
   async updateProject(id: string, dto: UpdateProjectDto, userId: string) {
     const project = await this.projectModel.findById(id);

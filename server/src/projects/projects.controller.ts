@@ -38,11 +38,20 @@ export class ProjectController {
     return this.projectService.getNotifications(req.user._id);
   }
 
+  // GET MY PROJECTS (projects owned by logged-in user)
+  @UseGuards(JwtAuthGuard)
+  @Get('personal')
+  getMyProjects(@Req() req) {
+    const userId = req.user.id || req.user._id;
+    return this.projectService.getMyProjects(userId);
+  }
+
   // GET PROJECT BY ID
   @Get(':id')
   getProjectById(@Param('id') id: string) {
     return this.projectService.getProjectById(id);
   }
+
 
   // UPDATE PROJECT (only owner can)
   @UseGuards(JwtAuthGuard)
