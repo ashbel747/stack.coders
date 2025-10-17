@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { sendContactForm } from "../../lib/submissions-api";
 import { ContactFormData } from "../../types/contacts";
+import { motion, useInView } from "framer-motion";
 
 export default function ContactForm() {
   const [form, setForm] = useState<ContactFormData>({
@@ -14,7 +15,9 @@ export default function ContactForm() {
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -35,14 +38,35 @@ export default function ContactForm() {
     }
   };
 
+  // Animation setup
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section className="min-h-screen bg-blue-50 flex items-center justify-center py-12 px-6">
-      <div className="bg-white shadow-lg rounded-2xl p-8 max-w-xl w-full border border-blue-100">
-        <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 60 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="bg-white shadow-lg rounded-2xl p-8 max-w-xl w-full border border-blue-100"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+          className="text-3xl font-bold text-blue-700 text-center mb-6"
+        >
           Contact us for any comments or suggestions here!
-        </h2>
+        </motion.h2>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-5"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
           <div>
             <label className="block text-blue-700 font-semibold mb-2">
               Name
@@ -87,13 +111,15 @@ export default function ContactForm() {
             />
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
+            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all disabled:opacity-50"
           >
             {loading ? "Sending..." : "Send Message"}
-          </button>
+          </motion.button>
 
           {success && (
             <p className="text-green-600 text-center font-medium mt-3">
@@ -105,8 +131,8 @@ export default function ContactForm() {
               {error}
             </p>
           )}
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
     </section>
   );
 }
