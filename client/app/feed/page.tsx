@@ -1,9 +1,9 @@
 import React from "react";
-import { getAllFeeds } from "../../lib/feed-api";
-import FeedCard from "../FeedCard";
+import { getAllFeed } from "../lib/feed-api";
+import FeedCard from "../components/FeedCard";
 
 const FeedPage = async () => {
-  const feeds = await getAllFeeds();
+  const feeds = await getAllFeed();
 
   return (
     <section className="min-h-screen bg-blue-50 py-12 px-6">

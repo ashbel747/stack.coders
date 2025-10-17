@@ -1,5 +1,5 @@
 import Hero from "../components/landing-page/Hero";
-import FeedPage from "../components/landing-page/Feed";
+import FeedPage from "../feed/page";
 import ContactForm from "../components/landing-page/ContactForm";
 import Footer from "../components/landing-page/Footer";
 
