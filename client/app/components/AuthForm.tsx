@@ -32,11 +32,12 @@ export default function AuthForm({ type }: AuthFormProps) {
         if (avatar) formData.append("avatar", avatar);
         const res = await signup(formData);
         localStorage.setItem("token", res.token);
-        router.push("/profile");
+        router.push("/dashboard");
       } else {
         const res = await login(form.email, form.password);
         localStorage.setItem("token", res.token);
-        router.push("/profile");
+        localStorage.setItem("user", JSON.stringify(res.user));
+        router.push("/dashboard");
       }
     } catch (err: any) {
       setError(err.response?.data?.message || "Something went wrong");
