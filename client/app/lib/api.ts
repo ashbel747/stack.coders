@@ -31,6 +31,13 @@ export const getProfile = async (token: string): Promise<User> => {
   return res.data;
 };
 
+export const getUserProfile = async (id: string, token: string): Promise<User> => {
+  const res = await api.get(`/auth/profile/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
 export const updateProfile = async (
   token: string,
   formData: FormData
@@ -44,7 +51,11 @@ export const updateProfile = async (
   return res.data;
 };
 
-export const getAllMembers = async (): Promise<User[]> => {
-  const res = await api.get<User[]>("/auth/all");
+export const getAllMembers = async (token:string): Promise<{ totalMembers: number; users: User[] }> => {
+  const res = await api.get<{ totalMembers: number; users: User[] }>('/auth/all', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 };

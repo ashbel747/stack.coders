@@ -16,6 +16,9 @@ export class SignupDto {
   @IsOptional()
   avatar?: string;
 
+  @IsNotEmpty()
+  description: string;
+
   @IsEmail()
   email: string;
 
@@ -23,7 +26,7 @@ export class SignupDto {
   @Matches(/^\+?\d{7,15}$/, {
     message: 'Phone number must be valid and include country code if needed',
   })
-  phone: string; // 👈 Added phone number
+  phone: string;
 
   @IsOptional()
   @Transform(({ value }) => {

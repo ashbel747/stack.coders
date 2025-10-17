@@ -27,7 +27,7 @@ export class AuthService {
 
   // SIGNUP
   async signup(signupDto: SignupDto, file?: Express.Multer.File) {
-    const { name, email, phone, skills, password, confirmPassword, role } = signupDto;
+    const { name, email, description, phone, skills, password, confirmPassword, role } = signupDto;
 
     if (password !== confirmPassword) {
       throw new BadRequestException('Passwords do not match');
@@ -49,6 +49,7 @@ export class AuthService {
     const user = await this.userModel.create({
       name,
       email,
+      description,
       phone,
       skills,
       password: hashedPassword,
@@ -65,6 +66,7 @@ export class AuthService {
         id: user._id,
         name: user.name,
         email: user.email,
+        description: user.description,
         phone:user.phone,
         role:user.role,
         skills: user.skills,
@@ -172,10 +174,18 @@ export class AuthService {
     return { message: 'Password reset successful' };
   }
 
-  // GET ALL USERS (Admin only ideally)
+  // GET ALL USERS (Admin only)
   async getAllUsers() {
-    return this.userModel.find().select('-password');
+    const users = await this.userModel.find().select('-password -resetCode -resetCodeExpires');
+    const totalMembers = await this.userModel.countDocuments();
+
+    return {
+      totalMembers,
+      users,
+    };
   }
+
+
 
   // GET PROFILE
   async getProfile(userId: string) {
@@ -183,6 +193,14 @@ export class AuthService {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
+
+  //VIEW USER PROFILE
+  async getUserProfile(targetUserId: string) {
+    const user = await this.userModel.findById(targetUserId).select('-password -resetCode -resetCodeExpires');
+    if (!user) throw new NotFoundException('User not found');
+    return user;
+  }
+
 
   // UPDATE PROFILE
   async updateProfile(

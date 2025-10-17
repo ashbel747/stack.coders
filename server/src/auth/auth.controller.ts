@@ -9,6 +9,7 @@ import {
   Req,
   Delete,
   Get,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthService } from './auth.service';
@@ -16,6 +17,8 @@ import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from './guards/roles.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -63,7 +66,14 @@ export class AuthController {
     );
   }
 
-  // GET PROFILE
+  // Authenticated users can view any user's profile by ID
+  @UseGuards(JwtAuthGuard)
+  @Get('profile/:id')
+  getUserProfile(@Param('id') id: string, @Req() req) {
+    return this.authService.getUserProfile(id);
+  }
+
+  // VIEW YOUR PROFILE
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Req() req) {
@@ -89,7 +99,9 @@ export class AuthController {
     return this.authService.deleteProfile(req.user._id);
   }
 
-  // GET ALL USERS
+  // GET ALL USERS - Admin only
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
   @Get('all')
   getAllUsers() {
     return this.authService.getAllUsers();

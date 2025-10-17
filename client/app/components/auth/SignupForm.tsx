@@ -10,6 +10,7 @@ export default function SignupForm() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    description: "",
     phone: "",
     password: "",
     confirmPassword: "",
@@ -63,6 +64,18 @@ export default function SignupForm() {
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
           />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Description</label>
+          <textarea
+            placeholder="Describe yourself in 1-2 sentences"
+            className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            rows={3}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            required
+          ></textarea>
         </div>
 
         {/* Email */}

@@ -1,9 +1,12 @@
 export interface User {
   _id: string;
   name: string;
+  description: string;
   email: string;
-  skills: string[];
+  phone?: string;       
+  skills: string[];     
   avatar?: string;
+  role: string; 
 }
 
 export interface AuthResponse {
