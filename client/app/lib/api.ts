@@ -19,6 +19,11 @@ export const login = async (email: string, password: string): Promise<AuthRespon
   return res.data;
 };
 
+export const forgotPassword = async (email: string): Promise<{ message: string }> => {
+  const res = await api.post<{ message: string }>("/auth/forgot-password", { email });
+  return res.data;
+};
+
 export const getProfile = async (token: string): Promise<User> => {
   const res = await api.get<User>("/auth/profile", {
     headers: { Authorization: `Bearer ${token}` },

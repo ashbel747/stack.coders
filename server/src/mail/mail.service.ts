@@ -25,7 +25,7 @@ export class MailService {
       const data = await this.resend.emails.send({
         from: `Stack-Coders <${fromEmail}>`,
         to: [toEmail],
-        subject: 'Contact Form Submission',
+        subject: 'Stack-Coder mail',
         html: `
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
