@@ -32,6 +32,37 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  // Forgot password (send reset code)
+  @Post('forgot-password')
+  forgotPassword(@Body('email') email: string) {
+    return this.authService.forgotPassword(email);
+  }
+
+  // Verify reset code
+  @Post('verify-code')
+  verifyCode(@Body() body: { email: string; code: string }) {
+    return this.authService.verifyResetCode(body.email, body.code);
+  }
+
+  // Reset password
+  @Post('reset-password')
+  resetPassword(
+    @Body()
+    body: {
+      email: string;
+      code: string;
+      newPassword: string;
+      confirmPassword: string;
+    },
+  ) {
+    return this.authService.resetPassword(
+      body.email,
+      body.code,
+      body.newPassword,
+      body.confirmPassword,
+    );
+  }
+
   // GET PROFILE
   @UseGuards(JwtAuthGuard)
   @Get('profile')

@@ -1,18 +1,30 @@
-import { IsEmail, IsNotEmpty, MinLength, IsOptional, IsArray } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  MinLength,
+  IsOptional,
+  IsArray,
+  IsString,
+  Matches,
+} from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class SignupDto {
   @IsNotEmpty()
   name: string;
 
-  // Make avatar optional since it’s a file upload
   @IsOptional()
   avatar?: string;
 
   @IsEmail()
   email: string;
 
-  // Accept both arrays and comma-separated strings
+  @IsNotEmpty()
+  @Matches(/^\+?\d{7,15}$/, {
+    message: 'Phone number must be valid and include country code if needed',
+  })
+  phone: string; // 👈 Added phone number
+
   @IsOptional()
   @Transform(({ value }) => {
     if (typeof value === 'string') {
@@ -28,4 +40,8 @@ export class SignupDto {
 
   @MinLength(6)
   confirmPassword: string;
+
+  @IsOptional()
+  @IsString()
+  role: string = 'dev'; // defaults to "dev"
 }

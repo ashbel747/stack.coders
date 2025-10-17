@@ -10,6 +10,7 @@ import type { StringValue } from 'ms';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { MailModule } from '../mail/mail.module';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ dotenv.config();
       },
     }),
     CloudinaryModule,
+    MailModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, CloudinaryService],
