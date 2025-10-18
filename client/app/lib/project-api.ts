@@ -21,12 +21,17 @@ function authHeaders() {
 
 /* Projects */
 export const getAllProjects = async (): Promise<Project[]> => {
-  const res = await api.get<Project[]>('/projects');
+  const res = await api.get<Project[]>('/projects', {
+    headers: { ...authHeaders() },
+  });
   return res.data;
 };
 
+
 export const getProject = async (id: string): Promise<Project> => {
-  const res = await api.get<Project>(`/projects/${id}`);
+  const res = await api.get<Project>(`/projects/${id}`, {
+    headers: { ...authHeaders() },
+  });
   return res.data;
 };
 

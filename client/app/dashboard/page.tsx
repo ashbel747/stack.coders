@@ -59,11 +59,13 @@ export default function DashboardPage() {
           { title: "All Projects", link: "/projects", color: "bg-blue-400" },
           { title: "Community Feed", link: "/feed/my-feed", color: "bg-blue-600" },
           { title: "Members", link: "/members", color: "bg-blue-500" },
+          { title: "My notifications", link: "/projects/notifications", color: "bg-blue-400" },
         ]
       : [
           { title: "Create Project", link: "/projects/create", color: "bg-blue-600" },
           { title: "My Projects", link: "/projects/personal", color: "bg-blue-500" },
           { title: "All Projects", link: "/projects", color: "bg-blue-400" },
+          { title: "My notifications", link: "/projects/notifications", color: "bg-blue-600" },
         ];
 
   return (

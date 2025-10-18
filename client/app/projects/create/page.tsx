@@ -1,24 +1,24 @@
 "use client";
-// pages/projects/create.tsx
-import React, { useState } from 'react';
-import { createProject } from '../../lib/project-api';
-import { useRouter } from 'next/navigation';
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createProject } from "../../lib/project-api";
 
 const CreateProjectPage: React.FC = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    title: '',
-    description: '',
-    deadline: '',
-    requiredSkills: '',
-    category: '',
+    title: "",
+    description: "",
+    deadline: "",
+    requiredSkills: "",
+    category: "",
     teamSize: 1,
-    techStack: '',
-    githubRepo: '',
+    githubRepo: "",
   });
 
-  const handleChange = (k: string, v: any) => setForm(prev => ({ ...prev, [k]: v }));
+  const handleChange = (k: string, v: any) =>
+    setForm((prev) => ({ ...prev, [k]: v }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,71 +27,154 @@ const CreateProjectPage: React.FC = () => {
       const payload = {
         title: form.title,
         description: form.description,
-        deadline: form.deadline,
-        requiredSkills: form.requiredSkills ? form.requiredSkills.split(',').map(s => s.trim()) : [],
         category: form.category,
         teamSize: Number(form.teamSize),
-        techStack: form.techStack ? form.techStack.split(',').map(s => s.trim()) : undefined,
         githubRepo: form.githubRepo || undefined,
+        deadline: form.deadline || undefined,
+        requiredSkills: form.requiredSkills
+          ? form.requiredSkills.split(",").map((s) => s.trim())
+          : [],
       };
+
       await createProject(payload);
-      router.push('/projects/personal');
+      router.push("/projects/personal");
     } catch (err: any) {
       console.error(err);
-      alert(err?.response?.data?.message || 'Error creating project');
+      alert(err?.response?.data?.message || "Error creating project");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>
-        <h1 className="text-2xl font-bold mb-6">Create Project</h1>
-      <form onSubmit={submit} className="bg-white p-6 rounded shadow-sm space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Title</label>
-          <input value={form.title} onChange={e => handleChange('title', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" required />
-        </div>
+    <div className="min-h-screen bg-blue-50 py-12 px-6 flex justify-center mt-10">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md border border-blue-100 p-8">
+        <h1 className="text-3xl font-bold text-blue-700 text-center mb-2">
+          Ready to build something amazing?
+        </h1>
+        <p className="text-center text-gray-600 mb-8">
+          Fill out the details below to create your project.
+        </p>
 
-        <div>
-          <label className="block text-sm font-medium">Description</label>
-          <textarea value={form.description} onChange={e => handleChange('description', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" rows={4} required />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={submit} className="space-y-5">
+          {/* Title */}
           <div>
-            <label className="block text-sm">Deadline</label>
-            <input type="date" value={form.deadline} onChange={e => handleChange('deadline', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" />
+            <label className="block text-sm font-semibold text-blue-700">
+              Title
+            </label>
+            <input
+              type="text"
+              value={form.title}
+              onChange={(e) => handleChange("title", e.target.value)}
+              className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              required
+              placeholder="Title of your project"
+            />
           </div>
-          <div>
-            <label className="block text-sm">Category</label>
-            <input value={form.category} onChange={e => handleChange('category', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" required />
-          </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
+          {/* Description */}
           <div>
-            <label className="block text-sm">Team Size</label>
-            <input type="number" min={1} value={form.teamSize} onChange={e => handleChange('teamSize', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" required />
+            <label className="block text-sm font-semibold text-blue-700">
+              Description
+            </label>
+            <textarea
+              value={form.description}
+              onChange={(e) => handleChange("description", e.target.value)}
+              className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              rows={4}
+              required
+              placeholder="Briefly describe your project idea..."
+            />
           </div>
+
+          {/* Deadline + Category */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-blue-700">
+                Deadline
+              </label>
+              <input
+                type="date"
+                value={form.deadline}
+                onChange={(e) => handleChange("deadline", e.target.value)}
+                className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-blue-700">
+                Category
+              </label>
+              <input
+                type="text"
+                value={form.category}
+                onChange={(e) => handleChange("category", e.target.value)}
+                className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+                required
+                placeholder="e.g. Web Development"
+              />
+            </div>
+          </div>
+
+          {/* Team size */}
           <div>
-            <label className="block text-sm">Required Skills (comma separated)</label>
-            <input value={form.requiredSkills} onChange={e => handleChange('requiredSkills', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" />
+            <label className="block text-sm font-semibold text-blue-700">
+              Team Size
+            </label>
+            <input
+              type="number"
+              min={1}
+              value={form.teamSize}
+              onChange={(e) => handleChange("teamSize", e.target.value)}
+              className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              required
+            />
           </div>
-        </div>
 
-        <div>
-          <label className="block text-sm">Tech Stack (comma separated)</label>
-          <input value={form.techStack} onChange={e => handleChange('techStack', e.target.value)} className="mt-1 block w-full border px-3 py-2 rounded" />
-        </div>
+          {/* ✅ Required Skills */}
+          <div>
+            <label className="block text-sm font-semibold text-blue-700">
+              Required Skills
+            </label>
+            <input
+              type="text"
+              value={form.requiredSkills}
+              onChange={(e) => handleChange("requiredSkills", e.target.value)}
+              className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              placeholder="e.g. React, Node.js, MongoDB"
+              required
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Separate skills with commas (e.g. React, Tailwind, Node.js)
+            </p>
+          </div>
 
-        <div className="flex justify-end">
-          <button type="submit" disabled={loading} className="px-4 py-2 bg-blue-600 text-white rounded">
-            {loading ? 'Creating...' : 'Create Project'}
-          </button>
-        </div>
-      </form>
-    </>  
+          {/* GitHub Repo */}
+          <div>
+            <label className="block text-sm font-semibold text-blue-700">
+              GitHub Repository
+            </label>
+            <input
+              type="url"
+              value={form.githubRepo}
+              onChange={(e) => handleChange("githubRepo", e.target.value)}
+              className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
+              placeholder="https://github.com/yourusername/yourproject"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-center pt-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-all"
+            >
+              {loading ? "Creating..." : "Create Project"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

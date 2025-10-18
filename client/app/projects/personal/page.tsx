@@ -39,31 +39,42 @@ const MyProjectsPage: React.FC = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="text-blue-600 text-lg font-medium">Loading projects...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">My Projects</h1>
+    <div className="min-h-screen bg-blue-50 py-10 px-6 mt-10">
+      <h1 className="text-3xl font-bold text-blue-700 text-center mb-2">
+        My Projects
+      </h1>
+      <p className="text-center text-gray-600 mb-8">
+        View and manage your personal projects.
+      </p>
+
+      <div className="flex justify-center mb-8">
         <button
           onClick={() => router.push("/projects/create")}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-all"
         >
-          New Project
+          + New Project
         </button>
       </div>
 
-      {loading ? (
-        <div>Loading...</div>
-      ) : projects.length === 0 ? (
-        <div className="text-gray-600">No projects yet.</div>
+      {projects.length === 0 ? (
+        <p className="text-center text-gray-600">You haven't created any projects yet.</p>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
-            <ProjectCard
+            <div
               key={p._id}
-              project={p}
-              canEdit
-              onDelete={handleDelete}
-            />
+            >
+              <ProjectCard project={p} onDelete={handleDelete} />
+            </div>
           ))}
         </div>
       )}
