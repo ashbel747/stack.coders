@@ -38,16 +38,16 @@ export default function UserProfilePage() {
 
   if (error)
     return (
-      <div className="text-center mt-10 text-red-600 font-medium">{error}</div>
+      <div data-testid="error-profile" className="text-center mt-10 text-red-600 font-medium">{error}</div>
     );
 
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-blue-50 flex items-center justify-center py-10 px-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-blue-100 space-y-4">
+    <div data-testid="profile-page" className="min-h-screen bg-blue-50 flex items-center justify-center py-10 px-4">
+      <div data-testid="profile-card" className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-blue-100 space-y-4">
         {/* Header */}
-        <h1 className="text-2xl font-bold text-center text-blue-700 mb-4">
+        <h1 data-testid="profile-name" className="text-2xl font-bold text-center text-blue-700 mb-4">
           {user.name}'s Profile
         </h1>
 
@@ -114,7 +114,7 @@ export default function UserProfilePage() {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-gray-500 text-sm pt-4 border-t border-blue-100">
+        <div data-testid="profile-id" className="text-center text-gray-500 text-sm pt-4 border-t border-blue-100">
           <UserIcon className="inline-block w-4 h-4 mr-1" />
           Member ID: {user._id}
         </div>

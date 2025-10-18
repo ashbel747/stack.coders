@@ -92,6 +92,7 @@ export default function DashboardPage() {
         {quickActions.map((action, idx) => (
           <Link key={idx} href={action.link}>
             <div
+              data-testid={`quick-action-${action.title.toLowerCase().replace(/\s+/g, "-")}`}
               className={`${action.color} cursor-pointer text-white p-6 rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1`}
             >
               <h3 className="text-xl font-semibold mb-2">{action.title}</h3>

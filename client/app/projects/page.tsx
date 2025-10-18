@@ -34,7 +34,7 @@ const AllProjectsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-blue-50 py-10 px-6 mt-10">
-      <h1 className="text-3xl font-bold text-blue-700 text-center mb-2">
+      <h1 data-testid="projects-title" className="text-3xl font-bold text-blue-700 text-center mb-2">
         All Projects
       </h1>
       <p className="text-center text-gray-600 mb-8">
@@ -44,7 +44,7 @@ const AllProjectsPage: React.FC = () => {
       {projects.length === 0 ? (
         <p className="text-center text-gray-600">No projects found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div data-testid="projects-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
             <ProjectCard key={project._id} project={project} />
           ))}

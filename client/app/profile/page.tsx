@@ -97,6 +97,7 @@ export default function ProfilePage() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Full Name</label>
           <input
+            data-testid="name-input"
             type="text"
             value={user?.name || ""}
             onChange={(e) => setUser({ ...user!, name: e.target.value })}
@@ -179,11 +180,12 @@ export default function ProfilePage() {
 
         {/* Success & Error */}
         {success && <p className="text-green-600 text-sm">{success}</p>}
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p data-testid="error-profile" className="text-red-500 text-sm">{error}</p>}
 
         {/* Submit Button */}
         <div className="flex justify-end pt-2">
           <button
+            data-testid="update"
             type="submit"
             disabled={loading}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-70"

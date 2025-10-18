@@ -63,6 +63,7 @@ const CreateProjectPage: React.FC = () => {
               Title
             </label>
             <input
+              data-testid="title-input"
               type="text"
               value={form.title}
               onChange={(e) => handleChange("title", e.target.value)}
@@ -78,6 +79,7 @@ const CreateProjectPage: React.FC = () => {
               Description
             </label>
             <textarea
+              data-testid="description-input"
               value={form.description}
               onChange={(e) => handleChange("description", e.target.value)}
               className="mt-1 w-full border border-blue-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400 px-3 py-2 rounded-lg"
@@ -94,6 +96,7 @@ const CreateProjectPage: React.FC = () => {
                 Deadline
               </label>
               <input
+                data-testid="deadline-input"
                 type="date"
                 value={form.deadline}
                 onChange={(e) => handleChange("deadline", e.target.value)}
@@ -105,6 +108,7 @@ const CreateProjectPage: React.FC = () => {
                 Category
               </label>
               <input
+                data-testid="category-input"
                 type="text"
                 value={form.category}
                 onChange={(e) => handleChange("category", e.target.value)}
@@ -121,6 +125,7 @@ const CreateProjectPage: React.FC = () => {
               Team Size
             </label>
             <input
+              data-testid="team-size-input"
               type="number"
               min={1}
               value={form.teamSize}
@@ -130,12 +135,13 @@ const CreateProjectPage: React.FC = () => {
             />
           </div>
 
-          {/* ✅ Required Skills */}
+          {/* Required Skills */}
           <div>
             <label className="block text-sm font-semibold text-blue-700">
               Required Skills
             </label>
             <input
+              data-testid="skills-input"
               type="text"
               value={form.requiredSkills}
               onChange={(e) => handleChange("requiredSkills", e.target.value)}
@@ -154,6 +160,7 @@ const CreateProjectPage: React.FC = () => {
               GitHub Repository
             </label>
             <input
+              data-testid="github-input"
               type="url"
               value={form.githubRepo}
               onChange={(e) => handleChange("githubRepo", e.target.value)}
@@ -165,6 +172,7 @@ const CreateProjectPage: React.FC = () => {
           {/* Submit Button */}
           <div className="flex justify-center pt-4">
             <button
+              data-testid="create-project-button"
               type="submit"
               disabled={loading}
               className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-all"

@@ -29,6 +29,7 @@ export default function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-blue-50">
       <form
+        data-testid="login-form"
         onSubmit={handleSubmit}
         className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-blue-100"
       >
@@ -37,6 +38,7 @@ export default function LoginForm() {
         </h1>
 
         <input
+          data-testid="email-input"
           type="email"
           placeholder="Email"
           className="input"
@@ -44,6 +46,7 @@ export default function LoginForm() {
           required
         />
         <input
+          data-testid="password-input"
           type="password"
           placeholder="Password"
           className="input"
@@ -51,9 +54,10 @@ export default function LoginForm() {
           required
         />
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        {error && <p data-testid="error-message" className="text-red-500 text-sm mb-2">{error}</p>}
 
         <button
+          data-testid="login-button"
           type="submit"
           disabled={loading}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
@@ -62,12 +66,14 @@ export default function LoginForm() {
         </button>
 
         <p
+          data-testid="forgot-password-link"
           onClick={() => router.push("/auth/forgot-password")}
           className="text-blue-600 text-sm mt-4 text-center cursor-pointer hover:underline"
         >
           Forgot Password?
         </p>
         <p
+          data-testid="signup-link"
           onClick={() => router.push("/auth/signup")}
           className="text-blue-600 text-sm mt-4 text-center cursor-pointer hover:underline"
         >

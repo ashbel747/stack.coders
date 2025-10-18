@@ -47,6 +47,7 @@ export default function SignupForm() {
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center py-10 px-4">
       <form
+        data-testid="signup-form"
         onSubmit={handleSubmit}
         className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-blue-100 space-y-4"
       >
@@ -58,6 +59,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Full Name</label>
           <input
+            data-testid="name-input"
             type="text"
             placeholder="Enter your full name"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -70,6 +72,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Description</label>
           <textarea
+            data-testid="description-input"
             placeholder="Describe yourself in 1-2 sentences"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
             rows={3}
@@ -82,6 +85,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Email</label>
           <input
+            data-testid="email-input"
             type="email"
             placeholder="Enter your email"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -95,6 +99,7 @@ export default function SignupForm() {
           <label className="block text-sm font-medium text-gray-700">Phone</label>
           <div className="mt-1">
             <PhoneInput
+              data-testid="phone-input"
               country={"ke"}
               value={form.phone}
               onChange={(value:string) => setForm({ ...form, phone: `+${value}` })}
@@ -125,6 +130,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Password</label>
           <input
+            data-testid="password-input"
             type="password"
             placeholder="Enter password"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -137,6 +143,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
           <input
+            data-testid="confirm-password-input"
             type="password"
             placeholder="Re-enter password"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -151,6 +158,7 @@ export default function SignupForm() {
             Skills (comma separated)
           </label>
           <input
+            data-testid="skills-input"
             type="text"
             placeholder="React, Node.js, MongoDB"
             className="mt-1 block w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -162,6 +170,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Role</label>
           <select
+            data-testid="role-select"
             className="mt-1 block w-full px-4 py-2 border rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}
@@ -175,6 +184,7 @@ export default function SignupForm() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Profile Picture</label>
           <input
+            data-testid="avatar-input"
             type="file"
             accept="image/*"
             onChange={(e) => setAvatar(e.target.files?.[0] || null)}
@@ -183,11 +193,12 @@ export default function SignupForm() {
         </div>
 
         {/* Error */}
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p data-testid="error-message" className="text-red-500 text-sm">{error}</p>}
 
         {/* Submit */}
         <div className="flex justify-end pt-2">
           <button
+            data-testid="signup-button"
             type="submit"
             disabled={loading}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-70"

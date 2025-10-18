@@ -48,8 +48,8 @@ const MyProjectsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-blue-50 py-10 px-6 mt-10">
-      <h1 className="text-3xl font-bold text-blue-700 text-center mb-2">
+    <div data-testid="my-projects-page" className="min-h-screen bg-blue-50 py-10 px-6 mt-10">
+      <h1 data-testid="my-projects-title" className="text-3xl font-bold text-blue-700 text-center mb-2">
         My Projects
       </h1>
       <p className="text-center text-gray-600 mb-8">
@@ -58,6 +58,7 @@ const MyProjectsPage: React.FC = () => {
 
       <div className="flex justify-center mb-8">
         <button
+          data-testid="new-project-button"
           onClick={() => router.push("/projects/create")}
           className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-all"
         >
@@ -68,7 +69,7 @@ const MyProjectsPage: React.FC = () => {
       {projects.length === 0 ? (
         <p className="text-center text-gray-600">You haven't created any projects yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div data-testid="project-list" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
             <div
               key={p._id}
