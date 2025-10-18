@@ -24,11 +24,14 @@ export class Project extends Document {
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   owner: Types.ObjectId;
 
-  @Prop({ type: [String], default: [] })
-  teamMembers: string[];
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }], default: [] })
+  teamMembers: Types.ObjectId[];
 
   @Prop({ default: false })
   collaborationActive: boolean;
+
+  @Prop()
+  githubRepo?: string;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

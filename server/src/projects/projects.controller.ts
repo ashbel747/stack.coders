@@ -25,10 +25,12 @@ export class ProjectController {
     return this.projectService.createProject(dto, req.user._id);
   }
 
-  // GET ALL PROJECTS
+  // FETCH ALL PROJECTS
+  @UseGuards(JwtAuthGuard)
   @Get()
-  getAllProjects() {
-    return this.projectService.getAllProjects();
+  getAllProjects(@Req() req) {
+    const userId = req.user.id || req.user._id;
+    return this.projectService.getAllProjects(userId);
   }
 
   // GET NOTIFICATIONS (pending collaboration requests)
@@ -47,9 +49,11 @@ export class ProjectController {
   }
 
   // GET PROJECT BY ID
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  getProjectById(@Param('id') id: string) {
-    return this.projectService.getProjectById(id);
+  getProjectById(@Param('id') id: string, @Req() req) {
+    const userId = req.user.id || req.user._id;
+    return this.projectService.getProjectById(id, userId);
   }
 
 

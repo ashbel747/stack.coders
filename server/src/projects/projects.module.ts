@@ -5,6 +5,7 @@ import { CollaborationRequest, CollaborationRequestSchema } from './entities/col
 import { ProjectController } from './projects.controller';
 import { ProjectService } from './projects.service';
 import { AuthModule } from '../auth/auth.module';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { AuthModule } from '../auth/auth.module';
       { name: CollaborationRequest.name, schema: CollaborationRequestSchema },
     ]),
     AuthModule,
+    MailModule,
   ],
   controllers: [ProjectController],
   providers: [ProjectService],
