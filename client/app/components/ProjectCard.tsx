@@ -59,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div className="bg-white shadow-md rounded-xl p-6 border border-blue-100 transition hover:shadow-lg hover:border-blue-300">
       {/* --- Title & Description --- */}
-      <h2 className="text-xl font-semibold text-blue-800 mb-2">
+      <h2 data-testid="project-title" className="text-xl font-semibold text-blue-800 mb-2">
         {project.title}
       </h2>
       <p className="text-gray-700 mb-3 text-sm">{project.description}</p>

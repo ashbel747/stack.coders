@@ -37,18 +37,18 @@ const FeedPage = async () => {
   const feeds = await getAllFeed();
 
   return (
-    <section className="min-h-screen bg-blue-50 py-12 px-6">
+    <section data-testid="community-feed-section" className="min-h-screen bg-blue-50 py-12 px-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold text-blue-700 text-center mb-10">
+        <h1 data-testid="feed-title" className="text-4xl font-bold text-blue-700 text-center mb-10">
           Community Feed
         </h1>
 
         {feeds.length === 0 ? (
-          <p className="text-center text-gray-600">No news available yet.</p>
+          <p data-testid="no-feed-message" className="text-center text-gray-600">No news available yet.</p>
         ) : (
-          <div className="space-y-6">
+          <div data-testid="feed-list" className="space-y-6">
             {feeds.map((feed: any) => (
-              <FeedCard key={feed._id} feed={feed} />
+              <FeedCard data-testid={`feed-card-${feed._id}`} key={feed._id} feed={feed} />
             ))}
           </div>
         )}

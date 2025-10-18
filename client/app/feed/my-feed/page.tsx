@@ -49,9 +49,10 @@ export default function MyFeedPage() {
       </h1>
 
       {/* Create Post */}
-      <div className="bg-white shadow-md rounded-xl p-6 border border-blue-100 mb-10 max-w-xl mx-auto">
+      <div data-testid="create-post-form" className="bg-white shadow-md rounded-xl p-6 border border-blue-100 mb-10 max-w-xl mx-auto">
         <h2 className="text-lg font-semibold text-blue-700 mb-3">Create New Post</h2>
         <input
+          data-testid="title-input"
           type="text"
           placeholder="Title"
           className="w-full border border-blue-200 rounded-lg p-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -59,12 +60,14 @@ export default function MyFeedPage() {
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
+          data-testid="description-input"
           placeholder="Description"
           className="w-full border border-blue-200 rounded-lg p-2 mb-3 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <button
+          data-testid="post-button"
           onClick={handleCreate}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
         >
@@ -82,6 +85,7 @@ export default function MyFeedPage() {
           </h1>
           {feeds.map((f) => (
             <div
+              data-testid="myfeed-card"
               key={f._id}
               className="bg-white shadow-md rounded-xl p-6 border border-blue-100 transition hover:shadow-lg hover:border-blue-300"
             >
@@ -91,6 +95,7 @@ export default function MyFeedPage() {
                 {new Date(f.createdAt).toLocaleString()}
               </p>
               <button
+                data-testid={`delete-button-${f._id}`}
                 onClick={() => handleDelete(f._id)}
                 className="mt-4 w-full bg-red-500 text-white py-1 rounded-lg hover:bg-red-600 transition"
               >
