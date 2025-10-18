@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Bottom Text */}
         <div className="border-t border-blue-200 pt-4 text-center text-sm text-blue-700">
-          © {new Date().getFullYear()} Built with passion by the Stack Coders Dev Team.
+          © {new Date().getFullYear()} Built with passion by the Stack Coders Admin Team.
         </div>
       </div>
     </footer>
