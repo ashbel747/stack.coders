@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { getUserProfile } from "../../lib/api";
 import { User } from "../../types/user";
 import { Mail, Phone, User as UserIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function UserProfilePage() {
   const { id } = useParams();
@@ -52,10 +53,12 @@ export default function UserProfilePage() {
 
         {/* Avatar */}
         <div className="flex flex-col items-center mb-6">
-          <img
-            src={user.avatar || "/default-avatar.png"}
-            alt={user.name}
-            className="w-24 h-24 rounded-full object-cover border-2 border-blue-400"
+          <Image
+            src={user?.avatar || "/default-avatar.jpg"}
+            alt={user?.name || "User avatar"}
+            className="rounded-full object-cover border-2 border-gray-800"
+            width={64}
+            height={64}
           />
           <p className="text-gray-600 mt-2 capitalize text-sm">Role:<span className="font-bold">{user.role}</span></p>
         </div>
@@ -75,7 +78,7 @@ export default function UserProfilePage() {
               href={user.email}
               className="text-blue-700 hover:text-blue-600 transition-colors"
             >
-               {user.email}
+              {user.email}
             </a>
           </div>
 

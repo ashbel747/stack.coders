@@ -137,6 +137,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       )}
 
+      {/* --- Project owner --- */}
+      <p className="text-sm mb-4">
+        <strong className="text-gray-800 font-bold">Project Owner: </strong> 
+        <Link
+          href={`/profile/${
+            typeof project.owner === "string"
+              ? project.owner
+              : project.owner?._id || ""
+          }`}
+          className="text-blue-600 hover:underline mr-2"
+        >
+          {typeof project.owner === "object"? project.owner.name || project.owner.email || "Unnamed": "Unknown Owner"}
+        </Link>
+      </p>
+
+
       {/* --- Feedback Message --- */}
       {message && (
         <p className="text-sm text-green-600 font-medium mb-2">{message}</p>

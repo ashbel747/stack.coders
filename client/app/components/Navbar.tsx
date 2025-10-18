@@ -86,15 +86,13 @@ const Navbar: React.FC = () => {
               href="/profile"
               className="flex items-center hover:opacity-80 transition"
             >
-              {user.avatar && (
-                <Image
-                  src={user.avatar}
-                  alt={user.name}
-                  width={36}
-                  height={36}
-                  className="rounded-full border border-blue-400"
-                />
-              )}
+              <Image
+                src={user?.avatar || "/default-avatar.jpg"}
+                alt={user?.name || "User avatar"}
+                width={36}
+                height={36}
+                className="rounded-full border border-gray-900"
+              />
             </Link>
 
             {/* Logout button */}
@@ -149,15 +147,13 @@ const Navbar: React.FC = () => {
                 href="/profile"
                 className="flex items-center space-x-2 hover:opacity-80 transition"
               >
-                {user.avatar && (
-                  <Image
-                    src={user.avatar}
-                    alt={user.name}
-                    width={36}
-                    height={36}
-                    className="rounded-full border border-blue-400"
-                  />
-                )}
+                <Image
+                  src={user?.avatar || "/default-avatar.jpg"}
+                  alt={user?.name || "User avatar"}
+                  width={36}
+                  height={36}
+                  className="rounded-full border border-gray-900"
+                />
                 {/* Username only visible on large devices */}
                 <span className="font-medium text-blue-700 hidden lg:inline">
                   {user.name}

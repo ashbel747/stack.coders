@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllMembers } from "../lib/api";
 import { User } from "../types/user";
+import Image from "next/image";
 
 export default function MembersPage() {
   const router = useRouter();
@@ -73,10 +74,12 @@ export default function MembersPage() {
             >
               {/* Avatar */}
               <div className="flex items-center gap-4 mb-3">
-                <img
-                  src={m.avatar || "/default-avatar.png"}
+                <Image
+                  src={m.avatar || "/default-avatar.jpg"}
                   alt="avatar"
-                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-300"
+                  className="rounded-full object-cover border-2 border-gray-800"
+                  width={64}
+                  height={64}
                 />
                 <div>
                   <h2 className="font-semibold text-blue-800 text-lg">

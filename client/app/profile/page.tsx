@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getProfile, updateProfile } from "../lib/api";
 import { User } from "../types/user";
+import Image from "next/image";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
@@ -77,10 +78,12 @@ export default function ProfilePage() {
 
         {/* Avatar */}
         <div className="flex flex-col items-center mb-4">
-          <img
-            src={user?.avatar || "/default-avatar.png"}
-            alt="Profile"
-            className="w-24 h-24 rounded-full object-cover border-2 border-blue-400"
+          <Image
+            src={user?.avatar || "/default-avatar.jpg"}
+            alt="avatar"
+            className="rounded-full object-cover border-2 border-gray-800"
+            width={64}
+            height={64}
           />
           <input
             type="file"
