@@ -45,7 +45,7 @@ export default function MyFeedPage() {
   return (
     <div className="min-h-screen bg-blue-50 py-10 px-6 mt-10">
       <h1 className="text-3xl font-bold text-blue-700 text-center mb-6">
-        My Feed
+        Community Feed
       </h1>
 
       {/* Create Post */}
@@ -77,6 +77,9 @@ export default function MyFeedPage() {
         <p className="text-center text-gray-600">No posts yet. Create your first post!</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h1 className="text-xl font-bold text-blue-700 text-center mb-6">
+            My posts
+          </h1>
           {feeds.map((f) => (
             <div
               key={f._id}

@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, Github, Linkedin, Twitter, Instagram, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -10,10 +11,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Column 1 - Name */}
           <div>
-            <h2 className="text-2xl font-bold text-blue-700">Stack Coders</h2>
-            <p className="text-blue-600 mt-2">
+            <Link href="/" className="text-2xl font-bold text-blue-600 flex items-center gap-2">
+              <span className="text-blue-700">&lt;/&gt;</span>
+              Stack Coders
+            </Link>
+            <p className="text-gray-800 mt-2">
               Collaborate and Build projects together to Solve real-world problems.
             </p>
+            <Link href="/auth/login" className="text-blue-600 mt-2 hover:underline">
+              Join our community
+            </Link>
           </div>
 
           {/* Column 2 - Socials */}
