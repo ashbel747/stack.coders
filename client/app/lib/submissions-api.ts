@@ -1,6 +1,6 @@
 import { ContactFormData } from "../types/contacts";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = 'https://stack-coders-services.onrender.com/';
 
 export async function sendContactForm(data: ContactFormData) {
   try {
