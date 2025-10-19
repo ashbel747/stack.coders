@@ -1,19 +1,19 @@
 import axios from "axios";
 import { Feed } from "../types/feed";
 
-const BASE_URL = "http://localhost:4000"; // 👈 Same as your auth API
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 const api = axios.create({
   baseURL: BASE_URL,
 });
 
-// 🟦 Get all feed posts (public)
+// Get all feed posts (public)
 export const getAllFeed = async (): Promise<Feed[]> => {
   const res = await api.get<Feed[]>("/feed");
   return res.data;
 };
 
-// 🟦 Get logged-in user's personal feed
+// Get logged-in user's personal feed
 export const getMyFeed = async (token: string): Promise<Feed[]> => {
   const res = await api.get<Feed[]>("/feed/my-posts", {
     headers: {
@@ -23,7 +23,7 @@ export const getMyFeed = async (token: string): Promise<Feed[]> => {
   return res.data;
 };
 
-// 🟩 Create a new feed post
+// Create a new feed post
 export const createFeed = async (
   token: string,
   data: { title: string; description: string }
@@ -36,7 +36,7 @@ export const createFeed = async (
   return res.data;
 };
 
-// 🟥 Delete a feed post
+// Delete a feed post
 export const deleteFeed = async (
   token: string,
   id: string

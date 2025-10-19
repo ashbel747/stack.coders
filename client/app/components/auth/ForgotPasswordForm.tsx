@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { forgotPassword } from "@/app/lib/api";
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
@@ -15,8 +15,8 @@ export default function ForgotPasswordForm() {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:4000/auth/forgot-password", { email });
-      setMessage("A verification code has been sent to your email.");
+      const res = await forgotPassword(email);
+      setMessage(res.message || "A verification code has been sent to your email.");
       setTimeout(() => router.push("/auth/verify-code"), 2000);
     } catch (err: any) {
       setMessage(err.response?.data?.message || "Something went wrong");

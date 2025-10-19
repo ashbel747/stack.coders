@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
+import { verifyCode } from "@/app/lib/api";
 import { useRouter } from "next/navigation";
 
 export default function VerifyCodeForm() {
@@ -12,12 +12,12 @@ export default function VerifyCodeForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/auth/verify-code", { email, code });
-      setMessage("Code verified! Redirecting to reset password...");
+      const res = await verifyCode(email, code);
+      setMessage(res.message || "Code verified! Redirecting to reset password...");
       setTimeout(() => router.push("/auth/reset-password"), 1500);
     } catch (err: any) {
       setMessage(err.response?.data?.message || "Invalid code");
-    }
+    } 
   };
 
   return (

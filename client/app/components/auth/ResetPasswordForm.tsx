@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
+import { resetPassword } from "@/app/lib/api";
 import { useRouter } from "next/navigation";
 
 export default function ResetPasswordForm() {
@@ -16,21 +16,15 @@ export default function ResetPasswordForm() {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      return setMessage("❌ Passwords do not match");
+      return setMessage("Passwords do not match");
     }
 
     setLoading(true);
     setMessage("");
 
     try {
-      await axios.post("http://localhost:4000/auth/reset-password", {
-        email,
-        code,
-        newPassword,
-        confirmPassword,
-      });
-
-      setMessage("Password reset successful!");
+      const res = await resetPassword(email, code, newPassword, confirmPassword);
+      setMessage(res.message || "Password reset successful!");
       setTimeout(() => router.push("/auth/login"), 1500);
     } catch (err: any) {
       setMessage(err.response?.data?.message || "Failed to reset password");

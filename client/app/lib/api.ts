@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AuthResponse, User } from "../types/user";
 
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -21,6 +21,29 @@ export const login = async (email: string, password: string): Promise<AuthRespon
 
 export const forgotPassword = async (email: string): Promise<{ message: string }> => {
   const res = await api.post<{ message: string }>("/auth/forgot-password", { email });
+  return res.data;
+};
+
+export const verifyCode = async (
+  email: string,
+  code: string
+): Promise<{ message: string }> => {
+  const res = await api.post<{ message: string }>("/auth/verify-code", { email, code });
+  return res.data;
+};
+
+export const resetPassword = async (
+  email: string,
+  code: string,
+  newPassword: string,
+  confirmPassword: string
+): Promise<{ message: string }> => {
+  const res = await api.post<{ message: string }>("/auth/reset-password", {
+    email,
+    code,
+    newPassword,
+    confirmPassword,
+  });
   return res.data;
 };
 
