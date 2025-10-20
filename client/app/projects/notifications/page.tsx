@@ -5,6 +5,7 @@ import {
   approveRequest,
   rejectRequest,
 } from "../../lib/project-api";
+import Link from "next/link";
 
 const NotificationsPage: React.FC = () => {
   const [requests, setRequests] = useState<any[]>([]);
@@ -83,7 +84,12 @@ const NotificationsPage: React.FC = () => {
                 </div>
                 <div className="mt-2 text-lg text-gray-600">
                   <span className="font-semibold text-blue-700">From:</span>{" "}
-                  {r.requester?.name || r.requester}
+                  <Link
+                    href={`/profile/${r.requester?._id}`}
+                    className="text-blue-600 hover:underline font-medium"
+                  >
+                    {r.requester?.name || r.requester?.email || "Unknown User"}
+                  </Link>
                 </div>
               </div>
 
