@@ -1,0 +1,14 @@
+# netlify.toml — configuration for deploying Next.js on Netlify
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Optional fallback in case of client-side routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
