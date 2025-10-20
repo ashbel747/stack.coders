@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     title: "Community Feed | Stack Coders",
     description:
       "Stay updated with the latest developer news, projects, and insights from the Stack Coders community.",
-    url: "https://stackcoders.vercel.app/feed",
+    url: "https://stack-coders.vercel.app/feed",
     siteName: "Stack Coders",
     images: [
       {
-        url: "https://stackcoders.vercel.app/og-image.png",
+        url: "https://stack-coders.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "Stack Coders Community Feed",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Stack Coders — Community Feed",
     description:
       "Explore developer stories, projects, and updates from the Stack Coders community.",
-    images: ["https://stackcoders.vercel.app/og-image.png"],
+    images: ["https://stack-coders.vercel.app/og-image.png"],
   },
 };
 

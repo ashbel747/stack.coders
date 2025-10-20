@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
         {/* 🔹 Get Started Button */}
         <div className="mt-12">
           <Link
-            href="/auth"
+            href="/auth/login"
             className="inline-block bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 hover:scale-105 transition-all duration-300"
           >
             Get Started

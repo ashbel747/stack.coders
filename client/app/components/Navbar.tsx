@@ -55,8 +55,11 @@ const Navbar: React.FC = () => {
     <nav className="bg-white shadow-md border-b border-blue-100 fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Brand */}
-        <Link href="/" className="text-2xl font-bold text-blue-600 flex items-center gap-2">
-          <span className="text-blue-700">&lt;/&gt;</span>
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold text-blue-600 text-xl sm:text-2xl md:text-3xl transition-all"
+        >
+          <span className="text-blue-700 text-2xl sm:text-3xl md:text-4xl">&lt;/&gt;</span>
           Stack Coders
         </Link>
 
@@ -89,9 +92,9 @@ const Navbar: React.FC = () => {
               <Image
                 src={user?.avatar || "/default-avatar.jpg"}
                 alt={user?.name || "User avatar"}
-                width={36}
-                height={36}
-                className="rounded-full border border-gray-900"
+                width={52}
+                height={52}
+                className="rounded-full border border-gray-900 shadow-sm"
               />
             </Link>
 
@@ -110,22 +113,10 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-6">
             {/* Project Links */}
             <Link
-              href="/projects/create"
+              href="/dashboard"
               className="text-blue-700 font-medium hover:text-blue-900 transition"
             >
-              New Project
-            </Link>
-            <Link
-              href="/projects"
-              className="text-blue-700 font-medium hover:text-blue-900 transition"
-            >
-              All Projects
-            </Link>
-            <Link
-              href="/projects/personal"
-              className="text-blue-700 font-medium hover:text-blue-900 transition"
-            >
-              My Projects
+              Dashboard
             </Link>
 
             {/* Notifications */}

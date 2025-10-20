@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     title: "Login | Stack Coders",
     description:
       "Access your Stack Coders account to share projects, follow developers, and explore the latest community updates.",
-    url: "https://stackcoders.vercel.app/auth/login",
+    url: "https://stack-coders.vercel.app/auth/login",
     siteName: "Stack Coders",
     images: [
       {
-        url: "https://stackcoders.vercel.app/og-image.png",
+        url: "https://stack-coders.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "Stack Coders Login Page",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Login | Stack Coders",
     description:
       "Access your Stack Coders account and connect with the developer community.",
-    images: ["https://stackcoders.vercel.app/og-image.png"],
+    images: ["https://stack-coders.vercel.app/og-image.png"],
   },
 };
 
