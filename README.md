@@ -28,6 +28,8 @@ It integrates authentication, collaboration requests, email notifications, and c
 - Create, edit, and delete personal projects.
 - View all public projects.
 - Each project stores details such as title, description, category, tech stack, and GitHub repository link.
+<img width="949" height="437" alt="image" src="https://github.com/user-attachments/assets/64a6e2c4-97a0-4acd-83ca-2cfb7d27f807" />
+
 
 
 ### 🤝 Collaboration Requests
