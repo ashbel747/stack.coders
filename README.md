@@ -36,7 +36,7 @@ It integrates authentication, collaboration requests, email notifications, and c
 - Other users can **send collaboration requests** on projects.
 - Project owners receive **email notifications (via Resend)**.
 - Owners can **approve or reject** requests.
-- Approved users become **team members** — their names and profiles become visible on the project.
+- Approved users become **team members** — their names, profiles  and GitHub repo for the project source code become visible on the project.
 
 <img width="938" height="440" alt="image" src="https://github.com/user-attachments/assets/6901a49b-c3f1-4b11-9fb8-eb554be5d7f7" />
 
